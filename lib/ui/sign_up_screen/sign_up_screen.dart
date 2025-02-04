@@ -1,14 +1,14 @@
-
 // ignore_for_file: dead_code
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/App_Images/app_images.dart';
-import 'package:graduation_project/Main_Screen/main_screen.dart';
-import 'package:graduation_project/Theme/dialog_utils.dart';
-import 'package:graduation_project/Theme/theme.dart';
+import 'package:graduation_project/ui/Theme/dialog_utils.dart';
+import 'package:graduation_project/ui/Theme/theme.dart';
 import 'package:graduation_project/data/repository/auth_repository/repository/auth_repository_impl.dart';
-import 'package:graduation_project/sign_up_screen/text_filed_siginup.dart';
+import 'package:graduation_project/ui/main_screen/main_screen.dart';
+import 'package:graduation_project/ui/otp/otp_screen.dart';
+import 'package:graduation_project/ui/sign_up_screen/text_filed_siginup.dart';
 import 'cubit/register_screen_viewmodel.dart';
 import 'cubit/register_state.dart';
 
@@ -58,7 +58,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         } else if (state is LoginSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(context, state.response.message ?? '',
-              posActionName: 'Ok');
+              posActionName: 'Ok', 
+              posAction: () {
+            Navigator.of(context).pushReplacementNamed(
+              OtpScreen.routName,
+              arguments: viewmodel.emailController.text,
+            );
+          });
         }
       },
       child: Scaffold(
@@ -223,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 15),
                   ElevatedButton(
                     onPressed: () {
-                      viewmodel.SignUp();
+                       viewmodel.SignUp();
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(11),

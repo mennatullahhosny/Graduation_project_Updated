@@ -49,4 +49,5 @@ class AppImages {
   static const String pass = 'assets/images/pass.png';
   static const String tour = 'assets/images/tour.png';
   static const String bbq = 'assets/images/bbq.png';
+  static const String loading = 'assetsi/mages/loading.json';
 }

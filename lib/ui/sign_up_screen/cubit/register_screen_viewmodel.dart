@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/data/repository/repository/auth_repository_contract.dart';
-import 'package:graduation_project/sign_up_screen/cubit/register_state.dart';
+import 'package:graduation_project/ui/sign_up_screen/cubit/register_state.dart';
 
 class RegisterScreenViewmodel extends Cubit<RegisterState> {
   RegisterScreenViewmodel({required this.repositoryContract})
@@ -14,7 +14,7 @@ class RegisterScreenViewmodel extends Cubit<RegisterState> {
   bool? value = false;
   var formKey = GlobalKey<FormState>();
   AuthRepositoryContract repositoryContract;
-  void SignUp() async {
+  void SignUp([BuildContext]) async {
     if (formKey.currentState?.validate() == true) {
       try {
         emit(LoginLoadingState(loadingMassage: "Loading..."));

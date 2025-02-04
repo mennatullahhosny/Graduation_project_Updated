@@ -1,6 +1,6 @@
 // import 'package:graduation_project/data/response/RegisterResponse.dart';
 
-import '../../response/RegisterResponse.dart';
+import 'package:graduation_project/data/response/RegisterResponse.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AuthResultEntity> register(

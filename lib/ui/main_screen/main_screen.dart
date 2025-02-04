@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/App_Images/app_images.dart';
-import 'package:graduation_project/Home_Screen/home_screen.dart';
-import 'package:graduation_project/Theme/theme.dart';
-import 'package:graduation_project/sign_up_screen/sign_up_screen.dart';
-import 'package:graduation_project/sing_in_screen/sign_in_screen.dart';
+import 'package:graduation_project/ui/Theme/theme.dart';
+import 'package:graduation_project/ui/home_screen/home_screen.dart';
+import 'package:graduation_project/ui/sign_up_screen/sign_up_screen.dart';
+import 'package:graduation_project/ui/sing_in_screen/sign_in_screen.dart';
 
 class MainScreen extends StatelessWidget {
   static const String routName = 'LoginScreen';

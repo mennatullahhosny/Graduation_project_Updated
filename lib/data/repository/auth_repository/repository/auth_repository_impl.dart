@@ -11,10 +11,16 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
       String username, String password, String email, String phone) {
     return remoteDataSource.register(username, password, email, phone);
   }
-  
+
   @override
   Future<AuthResultEntity> login(String email, String password) {
     // TODO: implement login
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<AuthResultEntity> verifyCode(String email, String verifyCode) {
+    // TODO: implement verifyCode
     throw UnimplementedError();
   }
 }

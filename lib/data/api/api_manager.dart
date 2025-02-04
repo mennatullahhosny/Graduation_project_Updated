@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:graduation_project/data/request/LoginRequest.dart';
+import 'package:graduation_project/data/request/OtpRequest.dart';
 import 'package:http/http.dart' as http;
 
 import '../request/RegisterRequest.dart';
@@ -29,32 +30,56 @@ class ApiManager {
     var response = await http.post(url, body: requestBody.toJson());
     return AuthResultEntity.fromJson(jsonDecode(response.body));
   }
+
   Future<AuthResultEntity> login(
-       String password, String email,) async {
+    String password,
+    String email,
+  ) async {
     //https://abdulrahmanantar.com/outbye/auth/signup.php
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.LoginApi);
     var requestBody = LoginRequest(
-     
       email: email,
       password: password,
-      
     );
     var response = await http.post(url, body: requestBody.toJson());
     return AuthResultEntity.fromJson(jsonDecode(response.body));
   }
 
-  // static Future<HomeScreen> getSources() async {
-  //   Uri url = Uri.https(
-  //     ApiConstants.baseUrl,
-  //     ApiConstants.sourceApi,
-  //   );
-  //   try{
-  //     var response = await http.get(url);
-  //     var bodyString = response.body;
-  //     var json = jsonDecode(bodyString);
-  //     return HomeScreen.fromJson(json);
-  //   }catch (e){
-  //     throw e ;
-  //   }
-  // }
-}
+// Verify Code API
+  Future<AuthResultEntity> verifyCode(String email, String verifyCode) async {
+    Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.verifyCodeApi);
+    var requestBody = OtpRequest(
+      email: email,
+      verifycode: verifyCode,
+    );
+    var response = await http.post(url, body: requestBody.toJson());
+    
+    return AuthResultEntity.fromJson(jsonDecode(response.body));
+  }
+    // try {
+    //   final response = await http.post(
+    //     url,
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: jsonEncode(body),
+    //   );
+    //   return response;
+    // } catch (e) {
+    //   throw Exception('Failed to verify code: $e');
+
+      // static Future<HomeScreen> getSources() async {
+      //   Uri url = Uri.https(
+      //     ApiConstants.baseUrl,
+      //     ApiConstants.sourceApi,
+      //   );
+      //   try{
+      //     var response = await http.get(url);
+      //     var bodyString = response.body;
+      //     var json = jsonDecode(bodyString);
+      //     return HomeScreen.fromJson(json);
+      //   }catch (e){
+      //     throw e ;
+      //   }
+      // }
+    }
+  
+

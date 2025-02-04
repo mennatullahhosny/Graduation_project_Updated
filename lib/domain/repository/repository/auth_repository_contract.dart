@@ -5,6 +5,4 @@ abstract class AuthRepositoryContract {
       String username, String password, String email, String phone);
 
   Future<AuthResultEntity> login(String email, String password);
-
-  Future<AuthResultEntity> verifyCode(String email, String verifyCode);
 }

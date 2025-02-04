@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/data/repository/repository/auth_repository_contract.dart';
-import 'package:graduation_project/sign_up_screen/cubit/register_state.dart';
+import 'package:graduation_project/ui/sign_up_screen/cubit/register_state.dart';
 
 class LoginScreenViewmodel extends Cubit<RegisterState> {
   LoginScreenViewmodel({required this.repositoryContract})
@@ -19,9 +19,8 @@ class LoginScreenViewmodel extends Cubit<RegisterState> {
       try {
         emit(LoginLoadingState(loadingMassage: "Loading..."));
         var response = await repositoryContract.login(
-            
-            passwordController.text,
-            emailController.text,
+          passwordController.text,
+          emailController.text,
         );
         if (response.status == 'failure') {
           emit(

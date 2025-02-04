@@ -17,7 +17,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<AuthResultEntity> login(String email, String password) async {
     // TODO: implement login
-    var  either = await apiManager.login(password, email);
+    var either = await apiManager.login(password, email);
     throw UnimplementedError();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:graduation_project/App_Images/app_images.dart';
-import 'package:graduation_project/Theme/theme.dart';
+import 'package:graduation_project/ui/Theme/theme.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
