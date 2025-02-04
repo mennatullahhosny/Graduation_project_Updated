@@ -229,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 15),
                   ElevatedButton(
                     onPressed: () {
-                       viewmodel.SignUp();
+                       viewmodel.SignUp(context);
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(11),
