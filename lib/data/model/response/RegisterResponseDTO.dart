@@ -35,7 +35,8 @@ class RegisterResponseDTO {
     map['message'] = _message;
     return map;
   }
-  AuthResultEntity toAuthResultEntity(){
+
+  AuthResultEntity toAuthResultEntity() {
     return AuthResultEntity();
   }
 }

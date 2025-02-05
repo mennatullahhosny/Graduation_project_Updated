@@ -6,7 +6,7 @@ import 'package:graduation_project/domain/entities/faliures.dart';
 import 'package:graduation_project/domain/repository/data_source/auth_remote_data_source.dart';
 import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
 
-class AuthRepositoryImpl implements  AuthRepositoryContract {
+class AuthRepositoryImpl implements AuthRepositoryContract {
   AuthRemoteDataSource remoteDataSource;
   AuthRepositoryImpl({required this.remoteDataSource});
   @override

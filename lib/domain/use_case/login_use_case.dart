@@ -7,8 +7,7 @@ class LoginUseCase {
   AuthRepositoryContract repositoryContract;
   LoginUseCase({required this.repositoryContract});
 
-  Future<AuthResultEntity> invoke(
-      String password, String email) {
+  Future<AuthResultEntity> invoke(String password, String email) {
     return repositoryContract.login(password, email);
   }
 }

@@ -3,14 +3,12 @@
 
 class CategoryResponseEntity {
   CategoryResponseEntity({
-      this.status, 
-      this.data,});
-
+    this.status,
+    this.data,
+  });
 
   String? status;
   List<DataEntity>? data;
-
-
 }
 
 /// categories_id : "4"
@@ -21,11 +19,12 @@ class CategoryResponseEntity {
 
 class DataEntity {
   DataEntity({
-      this.categoriesId, 
-      this.categoriesName, 
-      this.categoriesNameAr, 
-      this.categoriesImage, 
-      this.categoriesDatetime,});
+    this.categoriesId,
+    this.categoriesName,
+    this.categoriesNameAr,
+    this.categoriesImage,
+    this.categoriesDatetime,
+  });
 
   DataEntity.fromJson(dynamic json) {
     categoriesId = json['categories_id'];
@@ -49,5 +48,4 @@ class DataEntity {
     map['categories_datetime'] = categoriesDatetime;
     return map;
   }
-
 }

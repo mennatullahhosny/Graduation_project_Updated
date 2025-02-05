@@ -5,8 +5,9 @@ import 'package:graduation_project/data/model/response/RegisterResponse.dart';
 
 class LoginResponseDTO {
   LoginResponseDTO({
-      this.status, 
-      this.message,});
+    this.status,
+    this.message,
+  });
 
   LoginResponseDTO.fromJson(dynamic json) {
     status = json['status'];
@@ -21,9 +22,8 @@ class LoginResponseDTO {
     map['message'] = message;
     return map;
   }
-  AuthResultEntity toAuthResultEntity(){
-    return AuthResultEntity(
-      
-    );
+
+  AuthResultEntity toAuthResultEntity() {
+    return AuthResultEntity();
   }
 }

@@ -61,8 +61,7 @@ class SignUpScreenState extends State<SignUpScreen> {
         } else if (state is RegisterSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(context, state.response.message ?? '',
-              posActionName: 'Ok', 
-              posAction: () {
+              posActionName: 'Ok', posAction: () {
             Navigator.of(context).pushReplacementNamed(
               MainScreen.routName,
               arguments: viewmodel.emailController.text,
@@ -232,7 +231,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 15),
                   ElevatedButton(
                     onPressed: () {
-                       viewmodel.SignUp(context);
+                      viewmodel.SignUp(context);
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(11),
@@ -520,7 +519,7 @@ class SignUpScreenState extends State<SignUpScreen> {
 
 AuthRepositoryContract injectAuthRepositoryContract() {
   // تأكد من أنك مررت بيانات صحيحة للكائن الخاص بالمصدر البعيد
-  return AuthRepositoryImpl(remoteDataSource: AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance()));
+  return AuthRepositoryImpl(
+      remoteDataSource:
+          AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance()));
 }
-
-

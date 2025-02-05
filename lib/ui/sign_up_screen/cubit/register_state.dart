@@ -1,6 +1,4 @@
-
 import 'package:graduation_project/data/model/response/RegisterResponse.dart';
-
 
 abstract class RegisterState {}
 

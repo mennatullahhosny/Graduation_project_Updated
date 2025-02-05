@@ -8,7 +8,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({required this.apiManager});
 
   @override
-  Future<AuthResultEntity> register(String username, String password, String email, String phone) async {
+  Future<AuthResultEntity> register(
+      String username, String password, String email, String phone) async {
     var response = await apiManager.register(username, password, email, phone);
     return response;
   }
@@ -21,7 +22,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthResultEntity> verifyCode(String email, String verifyCode) async {
-    var response = await apiManager.verifyCode(email, verifyCode); // ✅ تأكد أن لديك هذه الدالة في apiManager
+    var response = await apiManager.verifyCode(
+        email, verifyCode); // ✅ تأكد أن لديك هذه الدالة في apiManager
     return response;
   }
 }

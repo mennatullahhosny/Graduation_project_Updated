@@ -9,7 +9,7 @@ class RegisterUseCase {
   RegisterUseCase({required this.repositoryContract});
 
   Future<AuthResultEntity> invoke(
-       String password, String email , String phone , String userName) {
-    return repositoryContract.register(password, email ,password , userName);
+      String password, String email, String phone, String userName) {
+    return repositoryContract.register(password, email, password, userName);
   }
 }

@@ -59,8 +59,7 @@ class _SignInScreenState extends State<SignInScreen> {
         } else if (state is LoginSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(context, state.response.message ?? '',
-              posActionName: 'Ok',
-              posAction: () {
+              posActionName: 'Ok', posAction: () {
             Navigator.of(context).pushReplacementNamed(
               HomeScreen.routName,
               arguments: viewmodel.emailController.text,
@@ -174,7 +173,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      viewmodel.SignIn(context); // هنا استدعاء SignIn من viewmodel
+                      viewmodel.SignIn(
+                          context); // هنا استدعاء SignIn من viewmodel
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(11),
@@ -247,5 +247,7 @@ class _SignInScreenState extends State<SignInScreen> {
 }
 
 AuthRepositoryContract injectAuthRepositoryContract() {
-  return AuthRepositoryImpl(remoteDataSource: AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance()));
+  return AuthRepositoryImpl(
+      remoteDataSource:
+          AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance()));
 }

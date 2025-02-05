@@ -15,10 +15,11 @@ AuthRemoteDataSource injectAuthRemoteDataSource() {
 
   return AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance());
 }
+
 LoginUseCase injectLoginUseCase() {
   return LoginUseCase(repositoryContract: injectAuthRepositoryContract());
 }
+
 RegisterUseCase injectRegisterUseCase() {
   return RegisterUseCase(repositoryContract: injectAuthRepositoryContract());
 }
-
