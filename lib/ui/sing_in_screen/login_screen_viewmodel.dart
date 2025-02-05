@@ -20,11 +20,11 @@ class LoginScreenViewmodel extends Cubit<LoginState> {
       try {
         emit(LoginLoadingState(loadingMassage: "Loading..."));
         var response = await repositoryContract.login(
-          passwordController.text,
           emailController.text,
+           passwordController.text,
         );
         if (response.status == 'failure') {
-          emit(LoginErrorState(errorMessage: response.message));
+          emit(LoginErrorState(errorMessage: response.status));
         } else {
           emit(LoginSuccessState(response: response));
         }

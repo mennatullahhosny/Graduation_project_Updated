@@ -57,14 +57,19 @@ class _SignInScreenState extends State<SignInScreen> {
           DialogUtils.showMessage(context, state.errorMessage!,
               posActionName: 'Ok');
         } else if (state is LoginSuccessState) {
-          DialogUtils.hideLoading(context);
-          DialogUtils.showMessage(context, state.response.message ?? '',
-              posActionName: 'Ok', posAction: () {
-            Navigator.of(context).pushReplacementNamed(
-              HomeScreen.routName,
-              arguments: viewmodel.emailController.text,
-            );
-          });
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen()),
+          );
+          // DialogUtils.hideLoading(context);
+          // DialogUtils.showMessage(context, state.response.message ?? '',
+          //     posActionName: 'Ok', posAction: () {
+          //   Navigator.of(context).pushReplacementNamed(
+          //     HomeScreen.routName,
+          //     arguments: viewmodel.emailController.text,
+          //   );
+          // });
         }
       },
       child: Scaffold(

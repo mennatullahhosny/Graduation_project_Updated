@@ -6,6 +6,7 @@ import 'package:graduation_project/App_Images/app_images.dart';
 import 'package:graduation_project/data/api/api_manager.dart';
 import 'package:graduation_project/data/repository/auth_repository/data_source/auth_remote_data_source_impl.dart';
 import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
+import 'package:graduation_project/ui/OTP/otp_screen.dart';
 import 'package:graduation_project/ui/Theme/dialog_utils.dart';
 import 'package:graduation_project/ui/Theme/theme.dart';
 import 'package:graduation_project/data/repository/auth_repository/repository/auth_repository_impl.dart';
@@ -63,7 +64,7 @@ class SignUpScreenState extends State<SignUpScreen> {
           DialogUtils.showMessage(context, state.response.message ?? '',
               posActionName: 'Ok', posAction: () {
             Navigator.of(context).pushReplacementNamed(
-              MainScreen.routName,
+              OtpScreen.routName,
               arguments: viewmodel.emailController.text,
             );
           });
