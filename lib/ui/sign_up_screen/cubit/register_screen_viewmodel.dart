@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project/data/repository/repository/auth_repository_contract.dart';
+// import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
+import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
 import 'package:graduation_project/ui/sign_up_screen/cubit/register_state.dart';
 
 class RegisterScreenViewmodel extends Cubit<RegisterState> {
@@ -17,7 +18,7 @@ class RegisterScreenViewmodel extends Cubit<RegisterState> {
   void SignUp([BuildContext]) async {
     if (formKey.currentState?.validate() == true) {
       try {
-        emit(LoginLoadingState(loadingMassage: "Loading..."));
+        emit(RegisterLoadingState(loadingMassage: "Loading..."));
         var response = await repositoryContract.register(
             userNameController.text,
             passwordController.text,
@@ -25,16 +26,16 @@ class RegisterScreenViewmodel extends Cubit<RegisterState> {
             phoneController.text);
         if (response.status == 'failure') {
           emit(
-            LoginErrorState(errorMessage: response.message),
+            RegisterErrorState(errorMessage: response.message),
           );
         } else {
           emit(
-            LoginSuccessState(response: response),
+            RegisterSuccessState(response: response),
           );
         }
       } catch (e) {
         emit(
-          LoginErrorState(
+          RegisterErrorState(
             errorMessage: e.toString(),
           ),
         );

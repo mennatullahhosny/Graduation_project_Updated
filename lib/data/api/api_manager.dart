@@ -1,12 +1,12 @@
 // import 'package:graduation_project/data/response/RegisterResponse.dart';
 import 'dart:convert';
 
-import 'package:graduation_project/data/request/LoginRequest.dart';
-import 'package:graduation_project/data/request/OtpRequest.dart';
+import 'package:graduation_project/data/model/request/LoginRequest.dart';
+import 'package:graduation_project/data/model/request/OtpRequest.dart';
 import 'package:http/http.dart' as http;
 
-import '../request/RegisterRequest.dart';
-import '../response/RegisterResponse.dart';
+import '../model/request/RegisterRequest.dart';
+import '../model/response/RegisterResponse.dart';
 import 'api_constance.dart';
 
 class ApiManager {

@@ -1,9 +1,12 @@
-import '../../../response/RegisterResponse.dart';
-import '../../data_source/auth_remote_data_source.dart';
-import '../../repository/auth_repository_contract.dart';
-import '../data_source/auth_remote_data_source_impl.dart';
+import 'package:dartz/dartz.dart';
+import 'package:graduation_project/data/repository/auth_repository/data_source/auth_remote_data_source_impl.dart';
+import 'package:graduation_project/domain/repository/data_source/auth_remote_data_source.dart';
+import 'package:graduation_project/data/model/response/RegisterResponse.dart';
+import 'package:graduation_project/domain/entities/faliures.dart';
+import 'package:graduation_project/domain/repository/data_source/auth_remote_data_source.dart';
+import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
 
-class AuthRepositoryImpl implements AuthRepositoryContract {
+class AuthRepositoryImpl implements  AuthRepositoryContract {
   AuthRemoteDataSource remoteDataSource;
   AuthRepositoryImpl({required this.remoteDataSource});
   @override
@@ -13,18 +16,7 @@ class AuthRepositoryImpl implements AuthRepositoryContract {
   }
 
   @override
-  Future<AuthResultEntity> login(String email, String password) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<AuthResultEntity> login(String password, String email) {
+    return remoteDataSource.login(password, email);
   }
-  
-  @override
-  Future<AuthResultEntity> verifyCode(String email, String verifyCode) {
-    // TODO: implement verifyCode
-    throw UnimplementedError();
-  }
-}
-
-AuthRepositoryContract injectAuthRepositoryContract() {
-  return AuthRepositoryImpl(remoteDataSource: injectAuthRemoteDataSource());
 }

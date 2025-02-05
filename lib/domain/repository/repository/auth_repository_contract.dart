@@ -1,4 +1,4 @@
-import 'package:graduation_project/data/response/RegisterResponse.dart';
+import 'package:graduation_project/data/model/response/RegisterResponse.dart';
 
 abstract class AuthRepositoryContract {
   Future<AuthResultEntity> register(

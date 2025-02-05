@@ -3,7 +3,6 @@ import 'package:graduation_project/ui/Home_Screen/home_screen.dart';
 import 'package:graduation_project/ui/Main_Screen/main_screen.dart';
 import 'package:graduation_project/ui/Splash_Screen/splash_screen.dart';
 import 'package:graduation_project/ui/Theme/theme.dart';
-import 'package:graduation_project/ui/otp/otp_screen.dart';
 import 'package:graduation_project/ui/sign_up_screen/sign_up_screen.dart';
 import 'package:graduation_project/ui/sing_in_screen/sign_in_screen.dart';
 
@@ -27,7 +26,6 @@ class MyApp extends StatelessWidget {
         SignInScreen.routName: (context) => const SignInScreen(),
         SignUpScreen.routName: (context) => const SignUpScreen(),
         //CategoryDetails.routName: (context) => CategoryDetails(),
-        OtpScreen.routName : (context) =>  const OtpScreen(),
       },
     );
   }

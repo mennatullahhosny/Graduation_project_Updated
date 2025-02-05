@@ -3,12 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/App_Images/app_images.dart';
+import 'package:graduation_project/data/api/api_manager.dart';
+import 'package:graduation_project/data/repository/auth_repository/data_source/auth_remote_data_source_impl.dart';
+import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
 import 'package:graduation_project/ui/Theme/dialog_utils.dart';
 import 'package:graduation_project/ui/Theme/theme.dart';
 import 'package:graduation_project/data/repository/auth_repository/repository/auth_repository_impl.dart';
 import 'package:graduation_project/ui/main_screen/main_screen.dart';
-import 'package:graduation_project/ui/otp/otp_screen.dart';
 import 'package:graduation_project/ui/sign_up_screen/text_filed_siginup.dart';
+// import 'package:graduation_project/ui/sing_in_screen/sign_in_screen.dart';
 import 'cubit/register_screen_viewmodel.dart';
 import 'cubit/register_state.dart';
 
@@ -17,10 +20,10 @@ class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignUpScreen> createState() => SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class SignUpScreenState extends State<SignUpScreen> {
   RegisterScreenViewmodel viewmodel = RegisterScreenViewmodel(
     repositoryContract: injectAuthRepositoryContract(),
   );
@@ -49,19 +52,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return BlocListener<RegisterScreenViewmodel, RegisterState>(
       bloc: viewmodel,
       listener: (context, state) {
-        if (state is LoginLoadingState) {
+        if (state is RegisterLoadingState) {
           DialogUtils.showLoading(context, state.loadingMassage!);
-        } else if (state is LoginErrorState) {
+        } else if (state is RegisterErrorState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(context, state.errorMessage!,
               posActionName: 'Ok');
-        } else if (state is LoginSuccessState) {
+        } else if (state is RegisterSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(context, state.response.message ?? '',
               posActionName: 'Ok', 
               posAction: () {
             Navigator.of(context).pushReplacementNamed(
-              OtpScreen.routName,
+              MainScreen.routName,
               arguments: viewmodel.emailController.text,
             );
           });
@@ -514,3 +517,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
+
+AuthRepositoryContract injectAuthRepositoryContract() {
+  // تأكد من أنك مررت بيانات صحيحة للكائن الخاص بالمصدر البعيد
+  return AuthRepositoryImpl(remoteDataSource: AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance()));
+}
+
+

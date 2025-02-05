@@ -3,13 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/App_Images/app_images.dart';
+import 'package:graduation_project/data/api/api_manager.dart';
+import 'package:graduation_project/data/repository/auth_repository/data_source/auth_remote_data_source_impl.dart';
+import 'package:graduation_project/domain/repository/repository/auth_repository_contract.dart';
 import 'package:graduation_project/ui/Theme/dialog_utils.dart';
 import 'package:graduation_project/ui/Theme/theme.dart';
 import 'package:graduation_project/data/repository/auth_repository/repository/auth_repository_impl.dart';
 import 'package:graduation_project/ui/forget_password/forget_password.dart';
 import 'package:graduation_project/ui/main_screen/main_screen.dart';
 import 'package:graduation_project/ui/sign_up_screen/cubit/register_state.dart';
+import 'package:graduation_project/ui/sign_up_screen/sign_up_screen.dart';
 import 'package:graduation_project/ui/sing_in_screen/login_screen_viewmodel.dart';
+import 'package:graduation_project/ui/sing_in_screen/login_state.dart';
 import 'package:graduation_project/ui/sing_in_screen/text_filed_login.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -45,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginScreenViewmodel, RegisterState>(
+    return BlocListener<LoginScreenViewmodel, LoginState>(
         bloc: viewmodel,
         listener: (context, state) {
           if (state is LoginLoadingState) {
@@ -82,66 +87,105 @@ class _SignInScreenState extends State<SignInScreen> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
-          body: Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(25),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Image.asset(AppImages.sign),
-                    const SizedBox(height: 40),
-                    Text(
-                      "Email Address",
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 10),
-                    TextFiledLogin(
-                      text: 'User name / Email',
-                      type: TextInputType.emailAddress,
-                      action: TextInputAction.done,
-                      icon: Icons.email,
-                      controller: emailController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "E-mail is required";
-                        }
-                        bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value);
-                        if (!emailValid) {
-                          return 'PLease Enter Valid Email';
-                        }
-                        return null;
-                      },
-                    ),
+           body: Form(
+          key: viewmodel.formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Image.asset(
+                    AppImages.sign,
+                    width: 170,
+                    height: 170,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Email Address",
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 5),
+                  TextFiledLogin(
+                    text: 'User name / Email',
+                    type: TextInputType.emailAddress,
+                    action: TextInputAction.done,
+                    icon: Icons.email,
+                    controller: viewmodel.emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "E-mail is required";
+                      }
+                      bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value);
+                      if (!emailValid) {
+                        return 'PLease Enter Valid Email';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                
+          // Form(
+          //   key: viewmodel.formKey,
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(25),
+          //     child: SingleChildScrollView(
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.stretch,
+          //         children: [
+          //           Image.asset(AppImages.sign),
+          //           const SizedBox(height: 40),
+          //           Text(
+          //             "Email Address",
+          //             textAlign: TextAlign.start,
+          //             style: Theme.of(context).textTheme.titleLarge,
+          //           ),
+          //           const SizedBox(height: 10),
+          //           TextFiledLogin(
+          //             text: 'User name / Email',
+          //             type: TextInputType.emailAddress,
+          //             action: TextInputAction.done,
+          //             icon: Icons.email,
+          //             controller: viewmodel.emailController,
+          //             validator: (value) {
+          //               if (value == null || value.isEmpty) {
+          //                 return "E-mail is required";
+          //               }
+          //               bool emailValid = RegExp(
+          //                       r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          //                   .hasMatch(value);
+          //               if (!emailValid) {
+          //                 return 'PLease Enter Valid Email';
+          //               }
+          //               return null;
+          //             },
+          //           ),
                     const SizedBox(height: 20),
                     Text(
-                      "Password",
-                      textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 10),
-                    TextFiledLogin(
-                      isObsecure: true,
-                      password: true,
-                      text: 'Password',
-                      type: TextInputType.visiblePassword,
-                      action: TextInputAction.done,
-                      icon: Icons.remove_red_eye,
-                      controller: passwordController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Password is required";
-                        }
-                        if (value != passwordController.value) {
-                          return "Password Doesn't Match";
-                        }
-                        return null;
-                      },
-                    ),
+                    "Password",
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 5),
+                  TextFiledLogin(
+                    controller: viewmodel.passwordController,
+                    text: 'Password',
+                    icon: Icons.remove_red_eye,
+                    type: TextInputType.visiblePassword,
+                    action: TextInputAction.done,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password is required";
+                      }
+                      if (value.length < 6) {
+                        return "Password Should Be At Least 6 Chars";
+                      }
+                      return null;
+                    },
+                  ),
                     const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -404,3 +448,9 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
+
+AuthRepositoryContract injectAuthRepositoryContract() {
+  // تأكد من أنك مررت بيانات صحيحة للكائن الخاص بالمصدر البعيد
+  return AuthRepositoryImpl(remoteDataSource: AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance()));
+}
+

@@ -1,20 +1,22 @@
-import 'package:graduation_project/data/response/RegisterResponse.dart';
+
+import 'package:graduation_project/data/model/response/RegisterResponse.dart';
+
 
 abstract class RegisterState {}
 
 class RegisterInitialState extends RegisterState {}
 
-class LoginLoadingState extends RegisterState {
+class RegisterLoadingState extends RegisterState {
   String? loadingMassage;
-  LoginLoadingState({this.loadingMassage});
+  RegisterLoadingState({this.loadingMassage});
 }
 
-class LoginSuccessState extends RegisterState {
+class RegisterSuccessState extends RegisterState {
   AuthResultEntity response;
-  LoginSuccessState({required this.response});
+  RegisterSuccessState({required this.response});
 }
 
-class LoginErrorState extends RegisterState {
+class RegisterErrorState extends RegisterState {
   String? errorMessage;
-  LoginErrorState({this.errorMessage});
+  RegisterErrorState({this.errorMessage});
 }
