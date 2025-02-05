@@ -35,7 +35,7 @@ class ApiManager {
     String password,
     String email,
   ) async {
-    //https://abdulrahmanantar.com/outbye/auth/signup.php
+    //https://abdulrahmanantar.com/outbye/auth/login_app.php
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.LoginApi);
     var requestBody = LoginRequest(
       email: email,
